@@ -1,10 +1,16 @@
 package com.estat.HelloMix.Model.Movies;
 
-import com.estat.HelloMix.Model.Company;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ProductionCompany implements Company {
-    String name;
+public class ProductionCompany {
+    private String name;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

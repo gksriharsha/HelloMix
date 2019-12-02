@@ -1,16 +1,24 @@
 package com.estat.HelloMix.Dao;
 
 import com.estat.HelloMix.Model.Movies.Non_Animated_Movie;
+import org.springframework.stereotype.Component;
 
+import java.util.Hashtable;
+import java.util.List;
+import java.util.Optional;
+
+@Component
 public interface MovieDao {
 
-    public List<Non_Animated_MovieMovie> getallMovies();
+    void addMovieByName(String name);
 
-    public Non_Animated_Movie getMovieByName();
+    void addMovieByObject(Non_Animated_Movie movie);
 
-    public void addMovieByName();
+    Hashtable<String,Non_Animated_Movie> getAllMovies();
 
-    public void removeMovieByName();
+    Optional<Non_Animated_Movie> getMovieById(String id);
 
-    public void editMovieById();
+    void editMovieById();
+
+    void removeMovieByName();
 }

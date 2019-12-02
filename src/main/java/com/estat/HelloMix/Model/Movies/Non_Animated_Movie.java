@@ -1,9 +1,14 @@
 package com.estat.HelloMix.Model.Movies;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.List;
 @Component
 public class Non_Animated_Movie {
@@ -14,6 +19,7 @@ public class Non_Animated_Movie {
     private String language;
     private String genre;
     private float budget;
+    private float revenue;
     private float collections;
     private boolean multiLingual;
     private boolean isItFromBook;
@@ -34,10 +40,12 @@ public class Non_Animated_Movie {
     public String toString() {
         return "Non_Animated_Movie{" +
                 "title='" + title + '\'' +
+                ", ids=" + ids +
                 ", duration=" + duration +
                 ", language='" + language + '\'' +
                 ", genre='" + genre + '\'' +
                 ", budget=" + budget +
+                ", revenue=" + revenue +
                 ", collections=" + collections +
                 ", multiLingual=" + multiLingual +
                 ", isItFromBook=" + isItFromBook +
@@ -50,19 +58,34 @@ public class Non_Animated_Movie {
                 '}';
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-
-
     public Non_Animated_Movie() {
     }
 
+    public Non_Animated_Movie(String title, Dictionary ids, int duration, String language, String genre, float budget, float revenue, float collections, boolean multiLingual, boolean isItFromBook, boolean isItPartOfASeries) {
+        this.title = title;
+        this.ids = ids;
+        this.duration = duration;
+        this.language = language;
+        this.genre = genre;
+        this.budget = budget;
+        this.revenue = revenue;
+        this.collections = collections;
+        this.multiLingual = multiLingual;
+        this.isItFromBook = isItFromBook;
+        this.isItPartOfASeries = isItPartOfASeries;
+    }
+
+    public Non_Animated_Movie(Non_Animated_Movie movie)
+    {
+
+    }
+    public float getRevenue() {
+        return revenue;
+    }
+
+    public void setRevenue(float revenue) {
+        this.revenue = revenue;
+    }
 
     public boolean isItFromBook() {
         return isItFromBook;

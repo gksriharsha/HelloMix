@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
+@Component("Animated")
 public class Animation_Movie {
     private String title;
     private int duration;
