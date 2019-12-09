@@ -1,5 +1,6 @@
 package com.estat.HelloMix.Controller;
 
+import com.estat.HelloMix.Model.Movies.Movie;
 import com.estat.HelloMix.Model.Movies.Non_Animated_Movie;
 import com.estat.HelloMix.Service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +21,14 @@ public class MovieController {
     private MovieService movieService;
 
     @GetMapping("/")
-    public Hashtable<String,Non_Animated_Movie> getAllMovies()
+    public Hashtable<String,Movie> getAllMovies()
     {
         return movieService.getAllMovies();
         //return null;
     }
 
     @GetMapping("/{id}")
-    public Optional<Non_Animated_Movie> getMovieById(@PathVariable("id") String id)
+    public Optional<Movie> getMovieById(@PathVariable("id") String id)
     {
         return (movieService.getMovieById(id).isPresent()? movieService.getMovieById(id):movieService.fetchMovieById(id));
         //return movieService.fetchMovieById(id);

@@ -1,5 +1,6 @@
 package com.estat.HelloMix.Dao;
 
+import com.estat.HelloMix.Model.Movies.Movie;
 import com.estat.HelloMix.Model.Movies.Non_Animated_Movie;
 import com.estat.HelloMix.Model.Movies.Producer;
 import com.estat.HelloMix.Model.Movies.ProductionCompany;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
+import java.lang.reflect.Field;
 import java.util.*;
 
 @Repository("FakeDB")
@@ -17,18 +19,18 @@ public class FakeMovieDB implements MovieDao {
     @Autowired
     MovieService movieService;
 
-    private Hashtable<String, Non_Animated_Movie> DB;
+    private Hashtable<String, Movie> DB;
 
     public FakeMovieDB()
     {
         DB = new Hashtable<>();
     }
 
-    private Hashtable<String,Non_Animated_Movie> preloadMovies() throws Exception
+    private void preloadMovies() throws Exception
     {
-        List<Non_Animated_Movie> movies = new ArrayList<>();
+        List<Movie> movies = new ArrayList<>();
         List<String> movie_ids = new ArrayList<>();
-        Optional<Non_Animated_Movie> movie;
+        Optional<Movie> movie;
         String base_url = "";
         movie_ids.add(24428+"");
         movie_ids.add(99861+"");
@@ -52,18 +54,24 @@ public class FakeMovieDB implements MovieDao {
                 movies.add(new Non_Animated_Movie());
             }
         }
-        return DB;
     }
 
     @Override
-    public void addMovieByObject(Non_Animated_Movie movie) {
+    public void addMovieByObject(Movie movie) {
         DB.put(movie.getIds().get("TMDB_id").toString(),movie);
+        try {
+            System.out.println(movie.checkNull());
+        }
+        catch(Exception e)
+        {
+            System.out.println("Nope");
+        }
     }
 
     @Override
-    public Hashtable<String,Non_Animated_Movie> getAllMovies() {
+    public Hashtable<String,Movie> getAllMovies() {
         if(DB.isEmpty()) {
-            List<Non_Animated_Movie> movies = new ArrayList<>();
+            List<Movie> movies = new ArrayList<>();
             try {
                 preloadMovies();
                 return DB;
@@ -79,7 +87,7 @@ public class FakeMovieDB implements MovieDao {
     }
 
     @Override
-    public Optional<Non_Animated_Movie> getMovieById(String id) {
+    public Optional<Movie> getMovieById(String id) {
         return Optional.ofNullable(DB.get(id));
     }
 
@@ -97,5 +105,6 @@ public class FakeMovieDB implements MovieDao {
     public void editMovieById() {
 
     }
+
 
 }
